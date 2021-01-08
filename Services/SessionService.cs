@@ -16,7 +16,7 @@ namespace Application
         public async Task<int> AddSessionAsync(Session session)
         {
             var sameSessions = await _unitOfWork.Sessions
-                .FindSessionByParametersAsync(session.SessionTime, session.CinemaId, session.FilmId);
+                .FindSessionByParametersAsync(session.SessionTime, session.CinemaId, session.FilmId) ?? new List<Session>(0);
 
             if (sameSessions.Any())
             {
@@ -32,14 +32,6 @@ namespace Application
             var curSession = await _unitOfWork.Sessions.FindByIdAsync(id)
                 ?? throw new BusinessRuleValidationException("Сеанс не найден");
 
-            var sameSessions = await _unitOfWork.Sessions
-                .FindSessionByParametersAsync(session.SessionTime, session.CinemaId, session.FilmId);
-
-            if (sameSessions.Any(x => x.Id != curSession.Id))
-            {
-                throw new BusinessRuleValidationException("Несколько одинаковых сеансов");
-            }
-
             curSession.FilmId = session.FilmId;
             curSession.CinemaId = session.CinemaId;
             curSession.SessionTime = session.SessionTime;
@@ -50,11 +42,9 @@ namespace Application
 
         public async Task DeleteSessionAsync(int id)
         {
-            var session = await _unitOfWork.Sessions.FindByIdAsync(id);
-            if (session == null)
-            {
-                return;
-            }
+            var session = await _unitOfWork.Sessions.FindByIdAsync(id)
+                ?? throw new BusinessRuleValidationException("Сеанс не найден");
+
             _unitOfWork.Sessions.Delete(session);
             await _unitOfWork.SaveAsync();
         }
@@ -66,9 +56,7 @@ namespace Application
 
         public async Task<Session> GetByIdAsync(int id)
         {
-            var session = await _unitOfWork.Sessions.FindByIdAsync(id)
-                ?? throw new BusinessRuleValidationException("Сеанс не найден");
-
+            var session = await _unitOfWork.Sessions.FindByIdAsync(id);
             return session;
         }
     }

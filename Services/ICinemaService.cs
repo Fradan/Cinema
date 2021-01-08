@@ -9,7 +9,5 @@ namespace Application
         Task<Cinema> GetByIdAsync(int id);
 
         Task<List<Cinema>> GetAllAsync();
-
-        Task DeleteAsync(int id);
     }
 }

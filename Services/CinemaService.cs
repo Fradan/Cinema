@@ -1,5 +1,4 @@
-﻿using Application.Exceptions;
-using Core;
+﻿using Core;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,20 +10,9 @@ namespace Application
 
         public CinemaService(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-        public async Task DeleteAsync(int id)
-        {
-            var cinema = await _unitOfWork.Cinemas.FindByIdAsync(id);
-            if (cinema == null)
-            {
-                throw new BusinessRuleValidationException($"Объекта с идентификатором {id} не существует.");
-            }
-            _unitOfWork.Cinemas.Delete(cinema);
-            await _unitOfWork.SaveAsync();
-        }
-
         public async Task<List<Cinema>> GetAllAsync()
         {
-            return await _unitOfWork.Cinemas.GetAllAsync();
+            return await _unitOfWork.Cinemas.GetAllAsync() ?? new List<Cinema>(0);
         }
 
         public async Task<Cinema> GetByIdAsync(int id)

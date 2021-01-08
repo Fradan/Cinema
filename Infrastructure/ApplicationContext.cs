@@ -1,11 +1,5 @@
 ﻿using Core;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 
 namespace Infrastructure
 {
@@ -19,12 +13,8 @@ namespace Infrastructure
             modelBuilder.Entity<Session>()
                 .HasOne<Cinema>().WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
-
         }
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
-        {
-            
-        }
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
     }
 }
