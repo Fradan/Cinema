@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Application;
 using Application.Exceptions;
 using FluentValidation.AspNetCore;
@@ -19,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using CinemaWeb.Validation;
+using CinemaWeb.Mapping;
 
 namespace CinemaWeb
 {
@@ -60,6 +57,7 @@ namespace CinemaWeb
             services.AddScoped<ICinemaRepository, CinemaRepository>();
             services.AddScoped<ISessionService, SessionService>();
             services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<IFilmService, FilmService>();
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -67,6 +65,7 @@ namespace CinemaWeb
             {
                 cfg.AddProfile<SessionProfile>();
                 cfg.AddProfile<CinemaProfile>();
+                cfg.AddProfile<FilmProfile>();
             });
             services.AddTransient<IValidator<SessionViewModel>, SessionValidator>();
 

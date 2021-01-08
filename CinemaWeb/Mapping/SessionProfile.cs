@@ -2,7 +2,7 @@
 using Core;
 using System;
 
-namespace CinemaWeb
+namespace CinemaWeb.Mapping
 {
     public class SessionProfile : Profile
     {

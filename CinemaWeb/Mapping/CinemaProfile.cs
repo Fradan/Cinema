@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Core;
 
-namespace CinemaWeb
+namespace CinemaWeb.Mapping
 {
     public class CinemaProfile : Profile
     {
