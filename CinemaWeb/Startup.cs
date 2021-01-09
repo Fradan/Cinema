@@ -34,21 +34,7 @@ namespace CinemaWeb
             services.AddControllers()
                 .AddFluentValidation();
 
-            services.AddTransient<ProblemDetailsFactory, CustomProblemDetailsFactory>(provider =>
-            {
-                var options = provider.GetRequiredService<IOptions<ApiBehaviorOptions>>();
-                var problemDetailsFactory = new CustomProblemDetailsFactory(options);
-                problemDetailsFactory.Map<BusinessRuleValidationException>((ex, context) =>
-                    new ProblemDetails()
-                    {
-                        Title = ex.Message,
-                        Detail = ex.Details,
-                        Status = StatusCodes.Status409Conflict,
-                    });
-
-
-                return problemDetailsFactory;
-            });
+            services.AddExceptionInterceptor();
 
             services.AddSwaggerGen(options =>
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My WEB Api", Version = "v1" }));
@@ -87,11 +73,15 @@ namespace CinemaWeb
             {
                 app.UseExceptionHandler("/error");
             }
+
             app.UseHttpsRedirection();
+
             app.UseRouting();
+
             app.UseAuthorization();
 
             app.UseSwagger();
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
