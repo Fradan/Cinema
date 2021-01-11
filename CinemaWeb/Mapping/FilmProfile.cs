@@ -7,7 +7,7 @@ namespace CinemaWeb.Mapping
     {
         public FilmProfile()
         {
-            CreateMap<FilmViewModel, Film>()
+            CreateMap<FilmDto, Film>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(x => x.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(x => x.Duration, opt => opt.MapFrom(src => src.Duration))

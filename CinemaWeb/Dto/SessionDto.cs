@@ -2,7 +2,7 @@
 
 namespace CinemaWeb
 {
-    public class SessionViewModel
+    public class SessionDto
     {
         public DateTime SessionTime { get; set; }
         public int FilmId { get; set; }

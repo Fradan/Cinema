@@ -20,10 +20,10 @@ namespace CinemaWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<FilmViewModel>>> GetAll()
+        public async Task<ActionResult<List<FilmDto>>> GetAll()
         {
             var filmList = await _filmService.GetAllAsync();
-            var filmModels = _mapper.Map<List<FilmViewModel>>(filmList);
+            var filmModels = _mapper.Map<List<FilmDto>>(filmList);
             return filmModels;
         }
     }

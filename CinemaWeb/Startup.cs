@@ -53,7 +53,7 @@ namespace CinemaWeb
                 cfg.AddProfile<CinemaProfile>();
                 cfg.AddProfile<FilmProfile>();
             });
-            services.AddTransient<IValidator<SessionViewModel>, SessionValidator>();
+            services.AddTransient<IValidator<SessionDto>, SessionValidator>();
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
 

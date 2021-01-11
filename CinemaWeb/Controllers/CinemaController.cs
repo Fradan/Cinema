@@ -20,19 +20,19 @@ namespace CinemaWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CinemaViewModel>>> GetAll()
+        public async Task<ActionResult<List<CinemaDto>>> GetAll()
         {
             var cinemaList = await _cinemaService.GetAllAsync();
-            var cinemaModels = _mapper.Map<List<CinemaViewModel>>(cinemaList);
+            var cinemaModels = _mapper.Map<List<CinemaDto>>(cinemaList);
             return cinemaModels;
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<CinemaViewModel>> GetCinema(int id)
+        public async Task<ActionResult<CinemaDto>> GetCinema(int id)
         {
             var cinema =  await _cinemaService.GetByIdAsync(id);
-            var cinemaModel = _mapper.Map<CinemaViewModel>(cinema);
+            var cinemaModel = _mapper.Map<CinemaDto>(cinema);
             return cinemaModel;
         }
     }

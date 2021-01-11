@@ -8,7 +8,7 @@ namespace CinemaWeb.Mapping
     {
         public SessionProfile()
         {
-            CreateMap<SessionViewModel, Session>()
+            CreateMap<SessionDto, Session>()
                 .ForMember(x => x.SessionTime, opt => opt.MapFrom(src => 
                     new DateTime(src.SessionTime.Year, 
                                  src.SessionTime.Month, 

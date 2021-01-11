@@ -1,6 +1,6 @@
 ﻿namespace CinemaWeb
 {
-    public class FilmViewModel
+    public class FilmDto
     {
         public int Id { get; set; }
 

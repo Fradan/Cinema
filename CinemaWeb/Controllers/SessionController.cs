@@ -22,9 +22,8 @@ namespace CinemaWeb.Controllers
             _mapper = mapper;
         }
 
-        [Route("add")]
         [HttpPost]
-        public async Task<int> Add([FromBody] SessionViewModel sessionDto)
+        public async Task<int> Add([FromBody] SessionDto sessionDto)
         {
             var session = _mapper.Map<Session>(sessionDto);
             return await _sessionService.AddSessionAsync(session);
@@ -32,7 +31,7 @@ namespace CinemaWeb.Controllers
 
         [Route("{id}")]
         [HttpPut]
-        public async Task Update(int id, [FromBody] SessionViewModel sessionDto)
+        public async Task Update(int id, [FromBody] SessionDto sessionDto)
         {
             var session = _mapper.Map<Session>(sessionDto);
             await _sessionService.UpdateSessionAsync(id, session);
@@ -47,18 +46,18 @@ namespace CinemaWeb.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<ActionResult<SessionViewModel>> GetAsync(int id)
+        public async Task<ActionResult<SessionDto>> GetAsync(int id)
         {
             var session = await _sessionService.GetByIdAsync(id);
-            return _mapper.Map<SessionViewModel>(session);
+            return _mapper.Map<SessionDto>(session);
         }
 
         [Route("bydate={date}")]
         [HttpGet]
-        public async Task<ActionResult<List<SessionViewModel>>> GetSessionsByDate(DateTime date)
+        public async Task<ActionResult<List<SessionDto>>> GetSessionsByDate(DateTime date)
         {
             var sessions = await _sessionService.FindByDateAsync(date);
-            return _mapper.Map<List<SessionViewModel>>(sessions);
+            return _mapper.Map<List<SessionDto>>(sessions);
         }
     }
 }

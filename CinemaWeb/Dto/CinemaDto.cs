@@ -1,6 +1,6 @@
 ﻿namespace CinemaWeb
 {
-    public class CinemaViewModel
+    public class CinemaDto
     {
         public int Id { get; set; }
 

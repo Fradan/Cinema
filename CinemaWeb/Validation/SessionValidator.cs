@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CinemaWeb.Validation
 {
-    public class SessionValidator : AbstractValidator<SessionViewModel>
+    public class SessionValidator : AbstractValidator<SessionDto>
     {
         public SessionValidator()
         {
