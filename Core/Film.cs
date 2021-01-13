@@ -1,13 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Core
 {
     [Table("Film", Schema = "Directory")]
     public class Film
     {
-        [JsonPropertyName("Id")]
         public int Id { get; set; }
 
         public string Name { get; set; }
